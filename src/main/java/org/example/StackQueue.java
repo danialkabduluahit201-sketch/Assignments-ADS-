@@ -1,5 +1,6 @@
 package org.example;
 
+// STACK IMPLEMENTATION
 class Stack {
     private Node top;
     private int size;
@@ -86,8 +87,137 @@ class Stack {
         top = null;
         size = 0;
     }
+    
+    // 9. Convert Stack to Min Heap
+    public void convertToMinHeap() {
+        if (isEmpty() || size == 1) {
+            return;
+        }
+        
+        // Collect all elements into array
+        int[] elements = new int[size];
+        Node current = top;
+        int index = 0;
+        while (current != null) {
+            elements[index++] = current.data;
+            current = current.next;
+        }
+        
+        // Build min heap
+        buildMinHeap(elements);
+        
+        // Reconstruct stack from heap
+        clear();
+        for (int i = elements.length - 1; i >= 0; i--) {
+            push(elements[i]);
+        }
+    }
+    
+    // 10. Convert Stack to Max Heap
+    public void convertToMaxHeap() {
+        if (isEmpty() || size == 1) {
+            return;
+        }
+        
+        // Collect all elements into array
+        int[] elements = new int[size];
+        Node current = top;
+        int index = 0;
+        while (current != null) {
+            elements[index++] = current.data;
+            current = current.next;
+        }
+        
+        // Build max heap
+        buildMaxHeap(elements);
+        
+        // Reconstruct stack from heap
+        clear();
+        for (int i = elements.length - 1; i >= 0; i--) {
+            push(elements[i]);
+        }
+    }
+    
+    // Helper method to build min heap
+    private void buildMinHeap(int[] arr) {
+        int n = arr.length;
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            heapifyDown(arr, i, n, true);
+        }
+    }
+    
+    // Helper method to build max heap
+    private void buildMaxHeap(int[] arr) {
+        int n = arr.length;
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            heapifyDown(arr, i, n, false);
+        }
+    }
+    
+    // Heapify down helper
+    private void heapifyDown(int[] arr, int i, int n, boolean isMinHeap) {
+        int smallest = i;
+        int largest = i;
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+        
+        if (isMinHeap) {
+            if (left < n && arr[left] < arr[smallest]) {
+                smallest = left;
+            }
+            if (right < n && arr[right] < arr[smallest]) {
+                smallest = right;
+            }
+            if (smallest != i) {
+                swap(arr, i, smallest);
+                heapifyDown(arr, smallest, n, isMinHeap);
+            }
+        } else {
+            if (left < n && arr[left] > arr[largest]) {
+                largest = left;
+            }
+            if (right < n && arr[right] > arr[largest]) {
+                largest = right;
+            }
+            if (largest != i) {
+                swap(arr, i, largest);
+                heapifyDown(arr, largest, n, isMinHeap);
+            }
+        }
+    }
+    
+    // Helper method to swap elements
+    private void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    
+    // Display heap structure
+    public void displayHeap() {
+        if (isEmpty()) {
+            System.out.println("Stack is empty!");
+            return;
+        }
+        
+        // Collect elements
+        int[] elements = new int[size];
+        Node current = top;
+        int index = 0;
+        while (current != null) {
+            elements[index++] = current.data;
+            current = current.next;
+        }
+        
+        System.out.print("Heap structure: ");
+        for (int elem : elements) {
+            System.out.print(elem + " ");
+        }
+        System.out.println();
+    }
 }
 
+// QUEUE IMPLEMENTATION
 class Queue {
     private Node front;
     private Node rear;
@@ -185,20 +315,146 @@ class Queue {
         rear = null;
         size = 0;
     }
+    
+    // 9. Convert Queue to Min Heap
+    public void convertToMinHeap() {
+        if (isEmpty() || size == 1) {
+            return;
+        }
+        
+        // Collect all elements into array
+        int[] elements = new int[size];
+        Node current = front;
+        int index = 0;
+        while (current != null) {
+            elements[index++] = current.data;
+            current = current.next;
+        }
+        
+        // Build min heap
+        buildMinHeap(elements);
+        
+        // Reconstruct queue from heap
+        clear();
+        for (int elem : elements) {
+            enqueue(elem);
+        }
+    }
+    
+    // 10. Convert Queue to Max Heap
+    public void convertToMaxHeap() {
+        if (isEmpty() || size == 1) {
+            return;
+        }
+        
+        // Collect all elements into array
+        int[] elements = new int[size];
+        Node current = front;
+        int index = 0;
+        while (current != null) {
+            elements[index++] = current.data;
+            current = current.next;
+        }
+        
+        // Build max heap
+        buildMaxHeap(elements);
+        
+        // Reconstruct queue from heap
+        clear();
+        for (int elem : elements) {
+            enqueue(elem);
+        }
+    }
+    
+    // Helper method to build min heap
+    private void buildMinHeap(int[] arr) {
+        int n = arr.length;
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            heapifyDown(arr, i, n, true);
+        }
+    }
+    
+    // Helper method to build max heap
+    private void buildMaxHeap(int[] arr) {
+        int n = arr.length;
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            heapifyDown(arr, i, n, false);
+        }
+    }
+    
+    // Heapify down helper
+    private void heapifyDown(int[] arr, int i, int n, boolean isMinHeap) {
+        int smallest = i;
+        int largest = i;
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+        
+        if (isMinHeap) {
+            if (left < n && arr[left] < arr[smallest]) {
+                smallest = left;
+            }
+            if (right < n && arr[right] < arr[smallest]) {
+                smallest = right;
+            }
+            if (smallest != i) {
+                swap(arr, i, smallest);
+                heapifyDown(arr, smallest, n, isMinHeap);
+            }
+        } else {
+            if (left < n && arr[left] > arr[largest]) {
+                largest = left;
+            }
+            if (right < n && arr[right] > arr[largest]) {
+                largest = right;
+            }
+            if (largest != i) {
+                swap(arr, i, largest);
+                heapifyDown(arr, largest, n, isMinHeap);
+            }
+        }
+    }
+    
+    // Helper method to swap elements
+    private void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    
+    // Display heap structure
+    public void displayHeap() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty!");
+            return;
+        }
+        
+        // Collect elements
+        int[] elements = new int[size];
+        Node current = front;
+        int index = 0;
+        while (current != null) {
+            elements[index++] = current.data;
+            current = current.next;
+        }
+        
+        System.out.print("Heap structure: ");
+        for (int elem : elements) {
+            System.out.print(elem + " ");
+        }
+        System.out.println();
+    }
 }
 
 public class StackQueue {
     public static void main(String[] args) {
+
         
         // Test Stack
         testStack();
         
         // Test Queue
         testQueue();
-        
-        System.out.println("\n========================================");
-        System.out.println("ALL TESTS COMPLETED SUCCESSFULLY!");
-        System.out.println("========================================");
+
     }
     
     private static void testStack() {
@@ -240,6 +496,32 @@ public class StackQueue {
         stack.clear();
         stack.display();
         System.out.println("   Is empty: " + stack.isEmpty());
+        
+        System.out.println("\n9. Testing convertToMinHeap():");
+        Stack stackHeapMin = new Stack();
+        int[] minHeapData = {50, 30, 20, 15, 25, 5, 10};
+        for (int val : minHeapData) {
+            stackHeapMin.push(val);
+        }
+        System.out.println("   Original Stack:");
+        stackHeapMin.display();
+        stackHeapMin.convertToMinHeap();
+        System.out.println("   After converting to Min Heap:");
+        stackHeapMin.displayHeap();
+        stackHeapMin.display();
+        
+        System.out.println("\n10. Testing convertToMaxHeap():");
+        Stack stackHeapMax = new Stack();
+        int[] maxHeapData = {50, 30, 20, 15, 25, 5, 10};
+        for (int val : maxHeapData) {
+            stackHeapMax.push(val);
+        }
+        System.out.println("   Original Stack:");
+        stackHeapMax.display();
+        stackHeapMax.convertToMaxHeap();
+        System.out.println("   After converting to Max Heap:");
+        stackHeapMax.displayHeap();
+        stackHeapMax.display();
     }
     
     private static void testQueue() {
@@ -290,5 +572,32 @@ public class StackQueue {
         queue.clear();
         queue.display();
         System.out.println("   Is empty: " + queue.isEmpty());
+        
+        System.out.println("\n10. Testing convertToMinHeap():");
+        Queue queueHeapMin = new Queue();
+        int[] minHeapQueueData = {50, 30, 20, 15, 25, 5, 10};
+        for (int val : minHeapQueueData) {
+            queueHeapMin.enqueue(val);
+        }
+        System.out.println("   Original Queue:");
+        queueHeapMin.display();
+        queueHeapMin.convertToMinHeap();
+        System.out.println("   After converting to Min Heap:");
+        queueHeapMin.displayHeap();
+        queueHeapMin.display();
+        
+        System.out.println("\n11. Testing convertToMaxHeap():");
+        Queue queueHeapMax = new Queue();
+        int[] maxHeapQueueData = {50, 30, 20, 15, 25, 5, 10};
+        for (int val : maxHeapQueueData) {
+            queueHeapMax.enqueue(val);
+        }
+        System.out.println("   Original Queue:");
+        queueHeapMax.display();
+        queueHeapMax.convertToMaxHeap();
+        System.out.println("   After converting to Max Heap:");
+        queueHeapMax.displayHeap();
+        queueHeapMax.display();
     }
 }
+
