@@ -1,24 +1,23 @@
 package org.example;
 
+import com.sun.source.tree.BinaryTree;
+
 import java.util.Scanner;
 
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println(first_ns_sum(5));
-        System.out.println(first_n_sum_arr(5, new int[]{1, 2, 3, 4, 5}));
-        System.out.println(power(2, 5));
-        System.out.println(first_n_powers(2, 5));
-        task5(3, sc);
-        task6(5, sc);
-        task7(4);
-        task8(2,3);
-        task9("IXO");
-        for (int i = 0; i <= 32; i++) {
-            if (powerOfTwo(i)) System.out.println(i + " is a power of 2");
-            else System.out.println(i + " is not a power of 2");
+        int n = sc.nextInt();
+        for(int i=0;i<n;i++){
+            System.out.println(fibonacci(i));
         }
+
+    }
+    public static long fibonacci(int n){
+        if(n==0) return 0;
+        if(n==1) return 1;
+        return fibonacci(n-1)+fibonacci(n-2);
     }
 
     public static long first_ns_sum(int n) {
