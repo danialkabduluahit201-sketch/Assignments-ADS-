@@ -1,6 +1,5 @@
 package org.example;
 
-// STACK IMPLEMENTATION
 class Stack {
     private Node top;
     private int size;

@@ -13,7 +13,6 @@ public class HashTable {
             this.key = key;
             this.value = value;
         }
-
     }
     
     public HashTable(int numBuckets) {

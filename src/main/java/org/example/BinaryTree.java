@@ -193,7 +193,7 @@ public class BinaryTree<T extends Comparable<T>> {
         
         // Display tree
         tree.display();
-        
+        System.out.println(tree.getHeight());
         // Check if empty
         System.out.println("Is tree empty: " + tree.isEmpty());
         
